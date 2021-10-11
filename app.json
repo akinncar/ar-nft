@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "ios": {
+      "bundleIdentifier": "com.arnft"
+    },
+    "android": {
+      "package": "com.arnft"
+    },
+    "scheme": "arnft",
+    "icon": "assets/image/app-icon.png",
+    "splash": {
+      "image": "assets/image/app-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#222222"
+    }
+  }
+}
