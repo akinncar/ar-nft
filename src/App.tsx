@@ -1,4 +1,3 @@
-import { HARDHAT_PORT, HARDHAT_PRIVATE_KEY } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   useWalletConnect,
@@ -6,33 +5,21 @@ import {
 } from "@walletconnect/react-native-dapp";
 import React from "react";
 import {
+  Image,
   Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
-  Image,
   View,
 } from "react-native";
-import localhost from "react-native-localhost";
-import Web3 from "web3";
 
 import { expo } from "../app.json";
-// import Hello from "../artifacts/contracts/Hello.sol/Hello.json";
 
 const styles = StyleSheet.create({
   center: { alignItems: "center", justifyContent: "center" },
   // eslint-disable-next-line react-native/no-color-literals
   white: { backgroundColor: "white" },
 });
-
-const shouldDeployContract = async (web3, abi, data, from: string) => {
-  const deployment = new web3.eth.Contract(abi).deploy({ data });
-  const gas = await deployment.estimateGas();
-  const {
-    options: { address: contractAddress },
-  } = await deployment.send({ from, gas });
-  return new web3.eth.Contract(abi, contractAddress);
-};
 
 function Nft({ nft }) {
   const [uri, setUri] = React.useState('');
