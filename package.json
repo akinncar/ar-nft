@@ -104,7 +104,7 @@
   "jest": {
     "preset": "react-native",
     "testMatch": [
-      "**/__tests__/frontend/**/*.[jt]s?(x)"
+      "**/__tests__/src/**/*.[jt]s?(x)"
     ]
   },
   "config": {

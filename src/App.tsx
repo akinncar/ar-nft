@@ -10,13 +10,14 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Image,
   View,
 } from "react-native";
 import localhost from "react-native-localhost";
 import Web3 from "web3";
 
 import { expo } from "../app.json";
-import Hello from "../artifacts/contracts/Hello.sol/Hello.json";
+// import Hello from "../artifacts/contracts/Hello.sol/Hello.json";
 
 const styles = StyleSheet.create({
   center: { alignItems: "center", justifyContent: "center" },
@@ -33,51 +34,40 @@ const shouldDeployContract = async (web3, abi, data, from: string) => {
   return new web3.eth.Contract(abi, contractAddress);
 };
 
+function Nft({ nft }) {
+  const [uri, setUri] = React.useState('');
+
+  async function fetchImageUri(nft) {
+    if (!nft.uri.startsWith('http')) return
+
+    const response = await fetch(nft.uri);
+    const json = await response.json();
+
+    if (json.image) {
+      console.log(json)
+      setUri(json.image)
+    }
+  }
+
+  React.useEffect(() => {
+    fetchImageUri(nft)
+  }, [nft])
+
+  return (
+    <View>
+      <Text>{nft.address}</Text>
+      <Image style={{ width: 70, height: 70 }} source={{ uri }} />
+    </View>
+  )
+}
+
 function App(): JSX.Element {
   const connector = useWalletConnect();
   const [message, setMessage] = React.useState<string>("Loading...");
   const [nfts, setNfts] = React.useState([]);
-  const web3 = React.useMemo(
-    () =>
-      new Web3(
-        new Web3.providers.HttpProvider(`http://${localhost}:${HARDHAT_PORT}`)
-      ),
-    [HARDHAT_PORT]
-  );
-
-  React.useEffect(() => {
-    (async () => {
-      const { address } = await web3.eth.accounts.privateKeyToAccount(
-        HARDHAT_PRIVATE_KEY
-      );
-      const contract = await shouldDeployContract(
-        web3,
-        Hello.abi,
-        Hello.bytecode,
-        address
-      );
-      setMessage(await contract.methods.sayHello("React Native").call());
-    })();
-  }, [web3, shouldDeployContract, setMessage, HARDHAT_PRIVATE_KEY]);
 
   const connectWallet = React.useCallback(() => {
     return connector.connect();
-  }, [connector]);
-
-  const signTransaction = React.useCallback(async () => {
-    try {
-      await connector.signTransaction({
-        data: "0x",
-        from: "0xbc28Ea04101F03aA7a94C1379bc3AB32E65e62d3",
-        gas: "0x9c40",
-        gasPrice: "0x02540be400",
-        nonce: "0x0114",
-        to: "0x89D24A7b4cCB1b6fAA2625Fe562bDd9A23260359",
-        value: "0x00",
-      });
-    } catch (e) {
-      console.error(e);
-    }
   }, [connector]);
 
   const killSession = React.useCallback(() => {
@@ -93,30 +83,30 @@ function App(): JSX.Element {
   }
 
   React.useEffect(() => {
-    if (connector.accounts.length > 0) {
+    if (connector?.accounts?.length > 0) {
       fetchNfts(connector.accounts[0]);
     }
   }, [connector]);
 
   React.useEffect(() => {
-    if (connector.accounts.length > 0) {
+    if (connector?.accounts?.length > 0 && !nfts) {
       fetchNfts(connector.accounts[0]);
     }
   }, [nfts]);
 
   return (
     <View style={[StyleSheet.absoluteFill, styles.center, styles.white]}>
-      <Text testID="tid-message">{message}</Text>
+      {/* <Text testID="tid-message">{message}</Text> */}
       {!connector.connected && (
         <TouchableOpacity onPress={connectWallet}>
           <Text>Connect a Wallet</Text>
         </TouchableOpacity>
       )}
+      {nfts.map(({ nft }) => {
+        return <Nft nft={nft} />
+      })}
       {!!connector.connected && (
         <>
-          <TouchableOpacity onPress={signTransaction}>
-            <Text>Sign a Transaction</Text>
-          </TouchableOpacity>
           <TouchableOpacity onPress={killSession}>
             <Text>Kill Session</Text>
           </TouchableOpacity>
