@@ -1,36 +1,23 @@
-# TypeScript Example
+# AR NFT APP
 
-<p>
-  <!-- iOS -->
-  <img alt="Supports Expo iOS" longdesc="Supports Expo iOS" src="https://img.shields.io/badge/iOS-4630EB.svg?style=flat-square&logo=APPLE&labelColor=999999&logoColor=fff" />
-  <!-- Android -->
-  <img alt="Supports Expo Android" longdesc="Supports Expo Android" src="https://img.shields.io/badge/Android-4630EB.svg?style=flat-square&logo=ANDROID&labelColor=A4C639&logoColor=fff" />
-  <!-- Web -->
-  <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/42688281/138617703-b1536933-e901-4380-b2e7-919f07928615.PNG" width="230"/>
+  <img src="https://user-images.githubusercontent.com/42688281/138617713-0ebb0670-2c01-4641-84eb-63bf1f06714f.PNG" width="230"/>
+  <img src="https://user-images.githubusercontent.com/42688281/138617709-9328f913-8fe7-42f4-b866-70d64eaef820.PNG" width="230"/>
+  <img src="https://user-images.githubusercontent.com/42688281/138617709-9328f913-8fe7-42f4-b866-70d64eaef820.PNG" width="230"/>
 </p>
-
-```sh
-npx create-react-native-app -t with-typescript
-```
-
-TypeScript is a superset of JavaScript which gives you static types and powerful tooling in Visual Studio Code including autocompletion and useful inline warnings for type errors.
 
 ## 🚀 How to use
 
-#### Creating a new project
-
-- Install the CLI: `npm i -g expo-cli`
-- Create a project: `npx create-react-native-app -t with-typescript`
+- Clone Repository: `git clone https://github.com/akinncar/ar-nft`
 - `cd` into the project
+- Install dependencies: `yarn`
+- Run `yarn ios`
 
-### Adding TypeScript to existing projects
+## License
 
-- Create a blank TypeScript config: `touch tsconfig.json`
-- Run `expo start` to automatically configure TypeScript
-- Rename files to TypeScript, `.tsx` for React components and `.ts` for plain typescript files
+The app's source code is made available under the [MIT license](LICENSE). Some of the dependencies are licensed differently, with the BSD license, for example.
 
-> 💡 You can disable the TypeScript setup in Expo CLI with the environment variable `EXPO_NO_TYPESCRIPT_SETUP=1 expo start`
+## Contact
 
-## 📝 Notes
-
-- [Expo TypeScript guide](https://docs.expo.dev/versions/latest/guides/typescript/)
+Akinn Rosa - [Github](https://github.com/akinncar) - **[akinncar@hotmail.com](mailto:akinncar@hotmail.com)**
