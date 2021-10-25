@@ -6,6 +6,10 @@
   <img src="./assets/video/demo.gif" width="240"/>
 </p>
 
+## 👾 Description
+
+AR NFT is a mobile app developed using React Native, Wallet Connect, and Viro React to allow users to login in your favorite wallet app and visualize their NFTs with augmented reality using the smartphone camera.
+
 ## 🚀 How to use
 
 - Clone Repository: `git clone https://github.com/akinncar/ar-nft`
