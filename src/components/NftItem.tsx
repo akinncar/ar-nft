@@ -38,7 +38,17 @@ export function NftItem({ nft, openCamera }) {
       <Text>{nft.address}</Text>
       <View style={{ flexDirection: "row", paddingVertical: 16 }}>
         {uri.endsWith('.mp4')
-          ? <Video style={{ height: 70, width: 70 }} source={{ uri }} repeat />
+          ? <Video
+            style={{ height: 70, width: 70 }}
+            source={{ uri }}
+            repeat
+            bufferConfig={{
+              bufferForPlaybackAfterRebufferMs: 5000,
+              bufferForPlaybackMs: 2500,
+              maxBufferMs: 50000,
+              minBufferMs: 15000
+            }}
+          />
           : <Image style={{ height: 70, width: 70 }} source={{ uri }} />
         }
         <Button title="View with your camera" onPress={() => openCamera(uri)} />
