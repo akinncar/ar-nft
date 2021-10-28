@@ -9,20 +9,28 @@ import {
 export function NftItem({ nft, openCamera }) {
   const [uri, setUri] = React.useState("");
 
-  async function fetchImageUri(nft) {
-    if (!nft.uri.startsWith("http")) return;
+  function replaceUrl(nftUri) {
+    if (nftUri.startsWith("ipfs")) {
+      return nftUri.replace('ipfs://', 'https://ipfs.io/ipfs/')
+    }
 
-    const response = await fetch(nft.uri);
+    return nftUri
+  }
+
+  async function fetchImageUri(nft) {
+    const url = await replaceUrl(nft.uri)
+
+    const response = await fetch(url);
     const json = await response.json();
 
-    setUri(json.image);
+    const image = await replaceUrl(json.image)
+
+    setUri(image);
   }
 
   React.useEffect(() => {
     fetchImageUri(nft);
   }, [nft]);
-
-  if (!nft.uri.startsWith("http")) return <></>;
 
   return (
     <View style={{ padding: 16 }}>
