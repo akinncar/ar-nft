@@ -6,6 +6,7 @@ import {
 import React from "react";
 import {
   Button,
+  FlatList,
   LogBox,
   Platform,
   SafeAreaView,
@@ -89,19 +90,21 @@ function App(): JSX.Element {
   }
 
   return (
-    <View style={[StyleSheet.absoluteFill, { alignItems: "center", justifyContent: "center" }]}>
+    <SafeAreaView style={[StyleSheet.absoluteFill, { alignItems: "center", justifyContent: "center" }]}>
       <StatusBar barStyle='dark-content' />
       <Text testID="tid-message">{message}</Text>
       {!connector.connected && (
         <Button title="Connect a Wallet" onPress={connectWallet} />
       )}
-      {nfts.map(({ nft }) => {
-        return <NftItem nft={nft} openCamera={openCamera} />;
-      })}
+      <FlatList
+        data={nfts}
+        renderItem={({ item }) => <NftItem nft={item.nft} openCamera={openCamera} />}
+      />
+
       {!!connector.connected && (
         <Button title="Kill Session" onPress={killSession} />
       )}
-    </View >
+    </SafeAreaView >
   );
 }
 
