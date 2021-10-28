@@ -90,20 +90,23 @@ function App(): JSX.Element {
   }
 
   return (
-    <SafeAreaView style={[StyleSheet.absoluteFill, { alignItems: "center", justifyContent: "center" }]}>
+    <SafeAreaView style={{ alignItems: "center", flex: 1, justifyContent: "center" }}>
       <StatusBar barStyle='dark-content' />
-      <Text testID="tid-message">{message}</Text>
-      {!connector.connected && (
-        <Button title="Connect a Wallet" onPress={connectWallet} />
-      )}
+      <Text>{message}</Text>
+      {
+        !connector.connected && (
+          <Button title="Connect a Wallet" onPress={connectWallet} />
+        )
+      }
       <FlatList
         data={nfts}
         renderItem={({ item }) => <NftItem nft={item.nft} openCamera={openCamera} />}
       />
-
-      {!!connector.connected && (
-        <Button title="Kill Session" onPress={killSession} />
-      )}
+      {
+        !!connector.connected && (
+          <Button title="Kill Session" onPress={killSession} />
+        )
+      }
     </SafeAreaView >
   );
 }

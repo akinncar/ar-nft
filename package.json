@@ -23,6 +23,7 @@
     "react-native-stream": "0.1.9",
     "react-native-svg": "9.6.4",
     "react-native-unimodules": "0.14.10",
+    "react-native-video": "^5.2.0",
     "react-native-web": "~0.13.12",
     "react-viro": "^2.17.0",
     "web3": "1.3.1"
@@ -112,7 +113,6 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": "eslint --fix --ext '.ts,.tsx,.js,.jsx' -c .eslintrc.json"
   }

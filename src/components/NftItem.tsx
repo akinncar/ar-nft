@@ -5,6 +5,7 @@ import {
   Text,
   View
 } from "react-native";
+import Video from 'react-native-video';
 
 export function NftItem({ nft, openCamera }) {
   const [uri, setUri] = React.useState("");
@@ -36,7 +37,10 @@ export function NftItem({ nft, openCamera }) {
     <View style={{ padding: 16 }}>
       <Text>{nft.address}</Text>
       <View style={{ flexDirection: "row", paddingVertical: 16 }}>
-        <Image style={{ height: 70, width: 70 }} source={{ uri }} />
+        {uri.endsWith('.mp4')
+          ? <Video style={{ height: 70, width: 70 }} source={{ uri }} repeat />
+          : <Image style={{ height: 70, width: 70 }} source={{ uri }} />
+        }
         <Button title="View with your camera" onPress={() => openCamera(uri)} />
       </View>
     </View>
