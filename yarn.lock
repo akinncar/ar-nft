@@ -12616,6 +12616,11 @@ react-native-crypto@2.2.0:
     public-encrypt "^4.0.0"
     randomfill "^1.0.3"
 
+react-native-device-info@^8.4.5:
+  version "8.4.5"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-8.4.5.tgz#89434849d6146c003b8a8b29f4ed5b6261d8009b"
+  integrity sha512-0uKO9rBF4Uv8X+xLJdR6HkuyB2C4gNEcWdHPcS1MhtsIExP6NTbC3tgkrUUWZ7HODbn1MFx5LG5cGDe4X0zhWA==
+
 react-native-dotenv@2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/react-native-dotenv/-/react-native-dotenv-2.4.3.tgz#1d04043ecbba185dc1ddc01fd22b5aec162b891c"
@@ -12648,6 +12653,11 @@ react-native-localhost@1.0.0:
   dependencies:
     app-root-path "^3.0.0"
     ip "^1.1.5"
+
+react-native-mmkv@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/react-native-mmkv/-/react-native-mmkv-1.5.3.tgz#106fae1322bb86d36e70f436da656b165d8f9d1e"
+  integrity sha512-WAw4amVA+fhHc1X/G+Khx+kBFFQMZVDjtMTCi55nsojlmBcq99eqm8v7yzzsUT1K2znvd/ptjZ0eDIuYGKCkOQ==
 
 react-native-qrcode-svg@6.0.6:
   version "6.0.6"

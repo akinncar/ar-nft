@@ -11,10 +11,11 @@ import {
   Platform,
   SafeAreaView,
   StatusBar,
-  StyleSheet,
   Text,
   View
 } from "react-native";
+import DeviceInfo from 'react-native-device-info'
+import { MMKV } from 'react-native-mmkv'
 import {
   ViroARSceneNavigator,
 } from 'react-viro';
@@ -23,31 +24,42 @@ import { expo } from "../app.json";
 
 import { NftItem } from "./components/NftItem";
 import { NftSceneAR } from "./components/NftSceneAR";
+import { fetchNfts } from "./services/fetchNfts";
 
 LogBox.ignoreAllLogs()
 
+const storage = new MMKV()
+
 function App(): JSX.Element {
+  const jsonAccounts = storage.getString('accounts')
+  const accountsObject = jsonAccounts ? JSON.parse(jsonAccounts) : []
+
   const connector = useWalletConnect();
+
+  const [accounts, setAccounts] = React.useState(accountsObject);
   const [message, setMessage] = React.useState<string>("");
   const [nfts, setNfts] = React.useState([]);
   const [uri, setUri] = React.useState();
 
   const connectWallet = React.useCallback(() => {
+    if (DeviceInfo.isEmulator()) {
+      setAccounts(['0x6C99A69537aA5F3A1e2d846b8b85573d46D45E45']);
+      return
+    }
+
     return connector.connect();
   }, [connector]);
 
   const killSession = React.useCallback(() => {
     setNfts([])
+    setAccounts([])
     return connector.killSession();
   }, [connector]);
 
-  async function fetchNfts(account) {
+  async function loadNfts(account) {
     setMessage('Loading...')
-    const response = await fetch(
-      `https://api.paintswap.finance/userNFTs/${account}?allowNSFW=true&numToFetch=10&numToSkip=0`
-    );
-    const data = await response.json();
-    setNfts(data.nfts);
+    const nftList = await fetchNfts(account)
+    setNfts(nftList)
     setMessage(null)
   }
 
@@ -61,15 +73,20 @@ function App(): JSX.Element {
 
   React.useEffect(() => {
     if (connector?.accounts?.length > 0) {
-      fetchNfts(connector.accounts[0]);
+      setAccounts(connector.accounts)
+      loadNfts(connector.accounts[0]);
     }
   }, [connector]);
 
   React.useEffect(() => {
-    if (connector?.accounts?.length > 0 && !nfts) {
-      fetchNfts(connector.accounts[0]);
+    if (accounts.length > 0 && nfts.length === 0) {
+      loadNfts(accounts[0]);
     }
-  }, [nfts]);
+  }, [accounts, nfts]);
+
+  React.useEffect(() => {
+    storage.set('accounts', JSON.stringify(accounts))
+  }, [accounts])
 
   if (uri) {
     return (
@@ -94,16 +111,17 @@ function App(): JSX.Element {
       <StatusBar barStyle='dark-content' />
       <Text>{message}</Text>
       {
-        !connector.connected && (
+        !connector.connected && accounts.length === 0 && (
           <Button title="Connect a Wallet" onPress={connectWallet} />
         )
       }
       <FlatList
+        style={{ width: '100%' }}
         data={nfts}
-        renderItem={({ item }) => <NftItem nft={item.nft} openCamera={openCamera} />}
+        renderItem={({ item }) => <NftItem nft={item} openCamera={openCamera} />}
       />
       {
-        !!connector.connected && (
+        !!connector.connected || accounts.length > 0 && (
           <Button title="Kill Session" onPress={killSession} />
         )
       }
