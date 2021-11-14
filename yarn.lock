@@ -12654,6 +12654,11 @@ react-native-localhost@1.0.0:
     app-root-path "^3.0.0"
     ip "^1.1.5"
 
+react-native-mmkv@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/react-native-mmkv/-/react-native-mmkv-1.5.3.tgz#106fae1322bb86d36e70f436da656b165d8f9d1e"
+  integrity sha512-WAw4amVA+fhHc1X/G+Khx+kBFFQMZVDjtMTCi55nsojlmBcq99eqm8v7yzzsUT1K2znvd/ptjZ0eDIuYGKCkOQ==
+
 react-native-qrcode-svg@6.0.6:
   version "6.0.6"
   resolved "https://registry.yarnpkg.com/react-native-qrcode-svg/-/react-native-qrcode-svg-6.0.6.tgz#bd4756cc0d76eeb3d162dca2f55eea80e3ebbe97"

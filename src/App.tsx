@@ -15,6 +15,7 @@ import {
   View
 } from "react-native";
 import DeviceInfo from 'react-native-device-info'
+import { MMKV } from 'react-native-mmkv'
 import {
   ViroARSceneNavigator,
 } from 'react-viro';
@@ -27,9 +28,15 @@ import { fetchNfts } from "./services/fetchNfts";
 
 LogBox.ignoreAllLogs()
 
+const storage = new MMKV()
+
 function App(): JSX.Element {
+  const jsonAccounts = storage.getString('accounts')
+  const accountsObject = jsonAccounts ? JSON.parse(jsonAccounts) : []
+
   const connector = useWalletConnect();
-  const [accounts, setAccounts] = React.useState([]);
+
+  const [accounts, setAccounts] = React.useState(accountsObject);
   const [message, setMessage] = React.useState<string>("");
   const [nfts, setNfts] = React.useState([]);
   const [uri, setUri] = React.useState();
@@ -45,6 +52,7 @@ function App(): JSX.Element {
 
   const killSession = React.useCallback(() => {
     setNfts([])
+    setAccounts([])
     return connector.killSession();
   }, [connector]);
 
@@ -76,6 +84,10 @@ function App(): JSX.Element {
     }
   }, [accounts, nfts]);
 
+  React.useEffect(() => {
+    storage.set('accounts', JSON.stringify(accounts))
+  }, [accounts])
+
   if (uri) {
     return (
       <View style={{ flex: 1 }}>
@@ -99,7 +111,7 @@ function App(): JSX.Element {
       <StatusBar barStyle='dark-content' />
       <Text>{message}</Text>
       {
-        !connector.connected && (
+        !connector.connected && accounts.length === 0 && (
           <Button title="Connect a Wallet" onPress={connectWallet} />
         )
       }
@@ -109,7 +121,7 @@ function App(): JSX.Element {
         renderItem={({ item }) => <NftItem nft={item} openCamera={openCamera} />}
       />
       {
-        !!connector.connected && (
+        !!connector.connected || accounts.length > 0 && (
           <Button title="Kill Session" onPress={killSession} />
         )
       }
