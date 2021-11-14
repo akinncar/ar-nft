@@ -8,40 +8,15 @@ import {
 import Video from 'react-native-video';
 
 export function NftItem({ nft, openCamera }) {
-  const [uri, setUri] = React.useState("");
-
-  function replaceUrl(nftUri) {
-    if (nftUri.startsWith("ipfs")) {
-      return nftUri.replace('ipfs://', 'https://ipfs.io/ipfs/')
-    }
-
-    return nftUri
-  }
-
-  async function fetchImageUri(nft) {
-    const url = await replaceUrl(nft.uri)
-
-    const response = await fetch(url);
-    const json = await response.json();
-
-    const image = await replaceUrl(json.image)
-
-    setUri(image);
-  }
-
-  React.useEffect(() => {
-    fetchImageUri(nft);
-  }, [nft]);
-
   return (
     <View style={{ padding: 16 }}>
-      <Text>{nft.address}</Text>
       <View style={{ flexDirection: "row", paddingVertical: 16 }}>
-        {uri.endsWith('.mp4')
+        {nft.imageUrl.endsWith('.mp4')
           ? <Video
             style={{ height: 70, width: 70 }}
-            source={{ uri }}
+            source={{ uri: nft.imageUrl }}
             repeat
+            paused
             bufferConfig={{
               bufferForPlaybackAfterRebufferMs: 5000,
               bufferForPlaybackMs: 2500,
@@ -49,9 +24,9 @@ export function NftItem({ nft, openCamera }) {
               minBufferMs: 15000
             }}
           />
-          : <Image style={{ height: 70, width: 70 }} source={{ uri }} />
+          : <Image style={{ height: 70, width: 70 }} source={{ uri: nft.imageUrl }} />
         }
-        <Button title="View with your camera" onPress={() => openCamera(uri)} />
+        <Button title="View with your camera" onPress={() => openCamera(nft.imageUrl)} />
       </View>
     </View>
   );

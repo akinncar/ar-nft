@@ -293,6 +293,8 @@ PODS:
     - React-jsi (= 0.63.4)
   - RNCAsyncStorage (1.13.4):
     - React-Core
+  - RNDeviceInfo (8.4.5):
+    - React-Core
   - RNGestureHandler (1.10.3):
     - React-Core
   - RNReanimated (2.2.2):
@@ -384,6 +386,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -481,6 +484,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -546,6 +551,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   RNCAsyncStorage: 44539979e1f234262d64d3ce86ec21cceb1b2c5e
+  RNDeviceInfo: ec64a28e7ddf30399f34c04708fdf702560d083a
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNReanimated: 6ec2460b9c6c8f3b1403bd0eaa12d359a98650e3
   RNScreens: 21b73c94c9117e1110a79ee0ee80c93ccefed8ce
@@ -558,6 +564,6 @@ SPEC CHECKSUMS:
   ViroReact: 7ec32276dcd1883662b4587eaedfff67f7fc3625
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 9d2d9dff81788f7345099e8ae44bf92e9b00af1f
+PODFILE CHECKSUM: 34f212fb73c1c3f5b35a7f908a0b46ee84a37ae6
 
 COCOAPODS: 1.11.2

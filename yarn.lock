@@ -12616,6 +12616,11 @@ react-native-crypto@2.2.0:
     public-encrypt "^4.0.0"
     randomfill "^1.0.3"
 
+react-native-device-info@^8.4.5:
+  version "8.4.5"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-8.4.5.tgz#89434849d6146c003b8a8b29f4ed5b6261d8009b"
+  integrity sha512-0uKO9rBF4Uv8X+xLJdR6HkuyB2C4gNEcWdHPcS1MhtsIExP6NTbC3tgkrUUWZ7HODbn1MFx5LG5cGDe4X0zhWA==
+
 react-native-dotenv@2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/react-native-dotenv/-/react-native-dotenv-2.4.3.tgz#1d04043ecbba185dc1ddc01fd22b5aec162b891c"

@@ -35,6 +35,7 @@
   },
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "functional/prefer-readonly-type": "off",
     "eslint-comments/disable-enable-pair": [
       "error",
       {
